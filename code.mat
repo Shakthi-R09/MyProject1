@@ -1,0 +1,56 @@
+
+clc;
+clear all;
+close all;
+A = imread('WBC-Benign-001.jpg');
+subplot(3,2,1), imshow(A);
+title("Original Image");
+
+B= imresize(A,[256 256]);
+subplot(3,2,2), imshow(B);
+title("Resized Image");
+
+C=rgb2gray(B);
+subplot(3,2,3), imshow(C);
+title("Grayscale Image");
+
+J = imnoise(C,'salt & pepper');
+
+K=medfilt2(J);
+subplot(3,2,4),imshow(K);
+title("Median Filtered Image");
+
+h = 1/3ones(3,1);
+C1 = hh';
+b1=conv2(J,C1,'same');
+% im be your image
+%%imfilt = filter2(C,im);
+subplot(3,2,5), imshow(uint8(b1));
+title("Meanfiltered Image");
+
+L = imnoise(C,'poisson');
+K=medfilt2(L);
+subplot(3,2,4),imshow(K);
+title("Median Filtered Image");
+
+h = 1/3ones(3,1);
+C1 = hh';
+b1=conv2(L,C1,'same');
+% im be your image
+%%imfilt = filter2(C,im);
+subplot(3,2,5), imshow(uint8(b1));
+title("Meanfiltered Image");
+
+P = imnoise(C,'gaussian');
+K=medfilt2(P);
+subplot(3,2,4),imshow(K);
+title("Median Filtered Image");
+
+h = 1/3ones(3,1);
+C1 = hh';
+b1=conv2(P,C1,'same');
+% im be your image
+%%imfilt = filter2(C,im);
+subplot(3,2,5), imshow(uint8(b1));
+title("Meanfiltered Image");
+
